@@ -5,7 +5,8 @@ import {
   logoutCurrentUser,
   getAllUsers,
   getCurrentUserProfile,
-  updateCurrentUserProfile
+  updateCurrentUserProfile,
+  deleteUserById
 } from "../controllers/userController.js";
 import {
   authenticate,
@@ -18,5 +19,11 @@ router
   .get(authenticate, authorizedAdmin, getAllUsers);
 router.post("/auth", loginUser);
 router.post("/logout", logoutCurrentUser);
-router.route("/profile").get(authenticate, getCurrentUserProfile).put(authenticate,updateCurrentUserProfile);
+router
+  .route("/profile")
+  .get(authenticate, getCurrentUserProfile)
+  .put(authenticate, updateCurrentUserProfile);
+
+//Admin
+router.route("/:id").delete(authenticate,authorizedAdmin,deleteUserById)
 export default router;

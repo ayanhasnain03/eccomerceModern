@@ -89,9 +89,9 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
 
     if (req.body.password) {
-   const salt = await bcrypt.genSalt(10)
-   const hashedpassword=await bcrypt.hash(req.body.password,salt)
-   user.password=hashedpassword;
+      const salt = await bcrypt.genSalt(10);
+      const hashedpassword = await bcrypt.hash(req.body.password, salt);
+      user.password = hashedpassword;
     }
 
     const updatedUser = await user.save();
@@ -108,6 +108,20 @@ const updateCurrentUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteUserById = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);  
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Cannot delete admin user");
+    }
+    await user.deleteOne({ _id: user._id });
+    res.json({message:"user removed"})
+  }else{
+    res.status(400);
+    throw new Error("Cannot delete admin user");
+  }
+});
 export {
   createUser,
   loginUser,
@@ -115,4 +129,5 @@ export {
   getAllUsers,
   getCurrentUserProfile,
   updateCurrentUserProfile,
+  deleteUserById,
 };
