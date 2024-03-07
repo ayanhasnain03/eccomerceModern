@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import asyncHandler from "../middlewares/asynchandler.js";
 import bcrypt from "bcryptjs";
+//create User
 const createUser = asyncHandler(async (req, res, next) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
