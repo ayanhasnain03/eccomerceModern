@@ -64,8 +64,25 @@ const logoutCurrentUser = asyncHandler(async (req, res, next) => {
 
 const getAllUsers = asyncHandler(async (req, res, next) => {
   const users = await User.find({});
-  res.json({
-    users,
-  });
+  res.json(users);
 });
-export { createUser, loginUser, logoutCurrentUser, getAllUsers };
+const getCurrentUserProfile = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+  if(user){
+   res.json({
+    _id:user._id,
+    username:user.username,
+    email:user.email
+   }) 
+  }else{
+    res.status(404)
+    throw new Error("User not found ")
+  }
+});
+export {
+  createUser,
+  loginUser,
+  logoutCurrentUser,
+  getAllUsers,
+  getCurrentUserProfile,
+};
