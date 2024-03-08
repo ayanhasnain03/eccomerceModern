@@ -122,6 +122,17 @@ const deleteUserById = asyncHandler(async (req, res, next) => {
     throw new Error("User not found");
   }
 });
+
+const getUserById = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+ if(user){
+  res.json(user)
+ }
+ else{
+  res.status(404);
+  throw Error("User Not found")
+ }
+});
 export {
   createUser,
   loginUser,
@@ -130,4 +141,5 @@ export {
   getCurrentUserProfile,
   updateCurrentUserProfile,
   deleteUserById,
+  getUserById
 };
