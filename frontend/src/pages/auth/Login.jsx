@@ -25,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      console.log(res);
+    toast.success("login successfully")
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
     } catch (err) {
