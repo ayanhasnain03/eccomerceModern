@@ -23,4 +23,18 @@ const createCategory = asyncHandler(async (req, res) => {
     }
   });
 
-  export {createCategory}
+
+  
+  const updateCategory = asyncHandler(async(req,res)=>{
+    const {name}=req.body;
+    const {categoryId}=req.params;
+const category = await Category.findOne({_id:categoryId})
+if(!category){
+    return res.status(404).json({ error: "Category not found" });
+}
+category.name=name 
+
+const updatedCategory = await category.save()
+res.json(updatedCategory);
+  })
+  export {createCategory,updateCategory}
