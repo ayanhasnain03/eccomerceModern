@@ -15,21 +15,29 @@ import store from "./redux/store.js";
 
 import PrivateRoute from "./components/PrivateRoute.jsx";
 
-
 //Auth
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import Profile from "./pages/User/Profile.jsx";
 
+//Admin Route
+import AdminRoute from "./pages/Admin/AdminRoute.jsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-
-      <Route path="" element={<PrivateRoute/>}>
-        <Route path="/profile" element={<Profile/>}/>
-      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+
+    {/* admin Routes */}
+
+    <Route path="/admin" element={<AdminRoute/>}>
+      
+    </Route>
     </Route>
   )
 );
