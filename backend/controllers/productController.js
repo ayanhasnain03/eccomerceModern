@@ -100,4 +100,19 @@ const fetchProducts =asyncHandler(async(req,res)=>{
 })
 
 
-export { addProdut, updateProductDetails,removeProduct ,fetchProducts};
+const fetchProductById = asyncHandler(async(req,res)=>{
+    try {
+        const product = await Product.findById(req.params.id)
+        if(!product){
+            return res.json({error:"Product not found"})
+        }
+        res.status(200).json(product)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+})
+
+
+
+export { addProdut, updateProductDetails,removeProduct ,fetchProducts,fetchProductById};
