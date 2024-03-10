@@ -10,15 +10,23 @@ import {
   updateProductDetails,
   removeProduct,
   fetchProducts,
-  fetchProductById
+  fetchProductById,
+  fetchAllProducts
 } from "../controllers/productController.js";
 const router = express.Router();
 
-router.route("/").get(fetchProducts).post(authenticate, authorizedAdmin, formidable(), addProdut);
+router
+  .route("/")
+  .get(fetchProducts)
+  .post(authenticate, authorizedAdmin, formidable(), addProdut);
+
+
+router.route("/allProducts").get(fetchAllProducts)
+
 router.route("/:id").get(fetchProductById);
 router
   .route("/:id")
   .put(authenticate, authorizedAdmin, formidable(), updateProductDetails)
-  .delete(authenticate,authorizedAdmin,removeProduct)
+  .delete(authenticate, authorizedAdmin, removeProduct);
 
 export default router;
