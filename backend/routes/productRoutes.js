@@ -8,11 +8,12 @@ import checkId from "../middlewares/checkId.js";
 import {
   addProdut,
   updateProductDetails,
-  removeProduct
+  removeProduct,
+  fetchProducts
 } from "../controllers/productController.js";
 const router = express.Router();
 
-router.route("/").post(authenticate, authorizedAdmin, formidable(), addProdut);
+router.route("/").get(fetchProducts).post(authenticate, authorizedAdmin, formidable(), addProdut);
 router
   .route("/:id")
   .put(authenticate, authorizedAdmin, formidable(), updateProductDetails)
