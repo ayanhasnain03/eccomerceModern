@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const AdminProductUpdate = () => {
   const params = useParams();
 
-  const { data: productData } = useGetProductByIdQuery(params._id);
+  const { data: productData,refetch } = useGetProductByIdQuery(params._id);
 
   console.log(productData);
 
@@ -23,10 +23,10 @@ const AdminProductUpdate = () => {
     productData?.description || ""
   );
   const [price, setPrice] = useState(productData?.price || "");
-  const [category, setCategory] = useState(productData?.category || "");
+  const [category, setCategory] = useState(productData? productData.category : "");
   const [quantity, setQuantity] = useState(productData?.quantity || "");
   const [brand, setBrand] = useState(productData?.brand || "");
-  const [stock, setStock] = useState(productData?.countInStock);
+  const [stock, setStock] = useState(productData?.countInStock || "");
 
   // hook
   const navigate = useNavigate();
@@ -47,11 +47,12 @@ const AdminProductUpdate = () => {
       setName(productData.name);
       setDescription(productData.description);
       setPrice(productData.price);
-      setCategory(productData.category?._id);
+      setCategory(productData.category._id);
       setQuantity(productData.quantity);
       setBrand(productData.brand);
       setImage(productData.image);
     }
+    
   }, [productData]);
 
   const uploadFileHandler = async (e) => {
@@ -59,18 +60,15 @@ const AdminProductUpdate = () => {
     formData.append("image", e.target.files[0]);
     try {
       const res = await uploadProductImage(formData).unwrap();
-      toast.success("Item added successfully", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      toast.success("Item added successfully");
       setImage(res.image);
     } catch (err) {
-      toast.success("Item added successfully", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      toast.success("Item added successfully");
     }
   };
+useEffect(() => {
+  refetch()
+}, [refetch])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,29 +81,20 @@ const AdminProductUpdate = () => {
       formData.append("category", category);
       formData.append("quantity", quantity);
       formData.append("brand", brand);
-      formData.append("countInStock", stock);
+      formData.append("countInStock",stock);
 
       // Update product using the RTK Query mutation
       const data = await updateProduct({ productId: params._id, formData });
-
+console.log(data)
       if (data?.error) {
-        toast.error(data.error, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
+        toast.error(data.error);
       } else {
-        toast.success(`Product successfully updated`, {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
+        toast.success(`Product successfully updated`);
         navigate("/admin/allproductslist");
       }
     } catch (err) {
       console.log(err);
-      toast.error("Product update failed. Try again.", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      toast.error("Product update failed. Try again.");
     }
   };
 
@@ -117,10 +106,7 @@ const AdminProductUpdate = () => {
       if (!answer) return;
 
       const { data } = await deleteProduct(params._id);
-      toast.success(`"${data.name}" is deleted`, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-      });
+      toast.success(`"${data.name}" is deleted`);
       navigate("/admin/allproductslist");
     } catch (err) {
       console.log(err);

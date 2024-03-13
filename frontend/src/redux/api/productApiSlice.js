@@ -8,7 +8,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}`,
         params: { keyword },
       }),
-      keepUnusedDataFor: 5,
       providesTags: ["Products"],
     }),
 
@@ -19,10 +18,17 @@ export const productApiSlice = apiSlice.injectEndpoints({
       ],
     }),
 
-    allProducts: builder.query({
-      query: () => `${PRODUCT_URL}/allProducts`,
-    }),
+    // allProducts: builder.query({
+    //   query: () => `${PRODUCT_URL}/allProducts`,
+    // }),
 
+    allProducts: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/allProducts`,
+      }),
+      providesTags: ["Product"]
+    })
+,
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCT_URL}/${productId}`,
