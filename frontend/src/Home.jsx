@@ -1,8 +1,17 @@
+import { Link, useParams } from "react-router-dom";
+import { useGetProductsQuery } from "./redux/api/productApiSlice";
+import Loader from "./components/Loader";
+import Header from "./components/Header";
+import Message from "./components/Message";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  const { keyword } = useParams();
+  const { data, isLoading, isError } = useGetProductsQuery({ keyword });
 
-export default Home
+  return <>
+  {!keyword?<Header/>: null}
+  
+  </>;
+};
+
+export default Home;
