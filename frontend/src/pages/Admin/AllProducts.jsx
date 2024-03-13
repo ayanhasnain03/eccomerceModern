@@ -75,7 +75,7 @@ const AllProducts = () => {
                             />
                           </svg>
                         </Link>
-                        <p>$ {product?.price}</p>
+                        <p>${product?.price}</p>
                       </div>
                     </div>
                   </div>
