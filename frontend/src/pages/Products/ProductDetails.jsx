@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import moment from "moment";
 import HeartIcon from "./HeartIcon";
+import Ratings from "./Ratings";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -103,6 +104,10 @@ const ProductDetails = () => {
                     inStock : {product.countInStock}
                   </h1>
                 </div>
+              </div>
+              <div className="flex justify-between flex-wrap">
+                {/* ratings */}
+                <Ratings value={product.rating} text={`${product.numReviews} reviews`}/>
               </div>
             </div>
           </div>
