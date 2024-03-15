@@ -29,6 +29,7 @@ import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts";
 import Home from "./Home.jsx";
 import Favroites from "./pages/Products/Favroites.jsx";
+import ProductDetails from "./pages/Products/ProductDetails.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<Register />} />
 <Route index={true} path="/" element={<Home/>}/>
 <Route index={true} path="/favorite" element={<Favroites/>}/>
+<Route index={true} path="/product/:id" element={<ProductDetails/>}/>
 
 
       <Route path="" element={<PrivateRoute />}>
