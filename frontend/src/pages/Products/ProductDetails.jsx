@@ -151,13 +151,13 @@ const submitHandler = async(e)=>{
             </div>
             <div className="mt-[5rem] container flex flex-wrap items-start justify-between ml-[10rem]">
               <ProductTab loadingProductReview={loadingProductReview} userInfo={userInfo}
-              submitHandler={submitHandler}
+               submitHandler={submitHandler}
               rating={rating}
               setRating={setRating}
               comment={comment}
               setComment={setComment}
               product={product}
-
+              
               />
             </div>
           </div>

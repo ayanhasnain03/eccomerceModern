@@ -139,6 +139,26 @@ const ProductTabs = ({
           </>
         )}
       </section>
+      <section>
+        {activeTab === 3 && (
+          <section className="ml-[4rem] flex flex-wrap">
+{
+  !data ?Link(
+    <Loader/>
+  ):(
+    data.map((product)=>(
+      <div className=""key={data._id}>
+        <SmallProduct product={product}/>
+      </div>
+    ))
+  )
+}
+          </section>
+        )}
+      </section>
+      <section>
+      <section></section>
+      </section>
       
     </div>
   );
