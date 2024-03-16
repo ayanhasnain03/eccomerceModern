@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-
-
 const SmallProduct = ({ product }) => {
   return (
     <div className="w-[20rem] ml-[2rem] p-3">
