@@ -30,29 +30,30 @@ import AllProducts from "./pages/Admin/AllProducts";
 import Home from "./Home.jsx";
 import Favroites from "./pages/Products/Favroites.jsx";
 import ProductDetails from "./pages/Products/ProductDetails.jsx";
+import Cart from "./pages/Cart.jsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-<Route index={true} path="/" element={<Home/>}/>
-<Route index={true} path="/favorite" element={<Favroites/>}/>
-<Route index={true} path="/product/:id" element={<ProductDetails/>}/>
-
-
+      <Route index={true} path="/" element={<Home />} />
+      <Route index={true} path="/favorite" element={<Favroites />} />
+      <Route index={true} path="/product/:id" element={<ProductDetails />} />
+      <Route index={true} path="/cart" element={<Cart/>}/>
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
       </Route>
 
-    {/* admin Routes */}
+      {/* admin Routes */}
 
-    <Route path="/admin" element={<AdminRoute/>}>
-      <Route path="userlist" element={<UserList/>}/>
-      <Route path="categorylist" element={<CategoryList/>}/>
-      <Route path="allproductslist" element={<AllProducts />} />
-      <Route path="productlist" element={<ProductList/>}/>
-      <Route path="product/update/:_id" element={<ProductUpdate/>}/>
-    </Route>
+      <Route path="/admin" element={<AdminRoute />}>
+        <Route path="userlist" element={<UserList />} />
+        <Route path="categorylist" element={<CategoryList />} />
+        <Route path="allproductslist" element={<AllProducts />} />
+        <Route path="productlist" element={<ProductList />} />
+        <Route path="product/update/:_id" element={<ProductUpdate />} />
+      </Route>
     </Route>
   )
 );

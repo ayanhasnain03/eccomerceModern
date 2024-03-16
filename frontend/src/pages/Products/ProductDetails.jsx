@@ -19,7 +19,7 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTab from "./ProductTab";
-
+import { addToCart } from "../../redux/features/cart/cartSlice";
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
@@ -51,6 +51,10 @@ const submitHandler = async(e)=>{
   } catch (error) {
     toast.error(error?.data?.message || error.message)
   }
+}
+const addToCartHandler = ()=>{
+dispatch(addToCart({...product,qty}))
+navigate("/cart")
 }
   return (
     <>
@@ -141,7 +145,7 @@ const submitHandler = async(e)=>{
               </div>
               <div className="btn-container">
                 <button
-                  // onClick={addToCartHandler}
+                   onClick={addToCartHandler}
                   disable={product.countInStock === 0}
                   className="bg-pink-600 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
                 >
