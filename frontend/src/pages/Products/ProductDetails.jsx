@@ -19,7 +19,7 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTab from "./ProductTab";
-import { addToCart } from "../../redux/features/cart/cartSlice";
+import { addToCart, removeFromCart } from "../../redux/features/cart/cartSlice";
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
@@ -128,7 +128,8 @@ navigate("/cart")
                   text={`${product.numReviews} reviews`}
                 />
                 {product.countInStock > 0 && (
-                  <div>
+                 <div>
+                 <div>
                     <select
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
@@ -141,6 +142,10 @@ navigate("/cart")
                       ))}
                     </select>
                   </div>
+                  <div>
+                    <button className="text-red-500 mr-[5rem]" onClick={()=>removeFromCartHandler(item._id)}></button>
+                  </div>
+                 </div>
                 )}
               </div>
               <div className="btn-container">
