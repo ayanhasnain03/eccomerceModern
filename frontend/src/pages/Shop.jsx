@@ -70,8 +70,7 @@ const Shop = () => {
     ),
   ];
 
-  const handlePriceChange = (e) => {
-    // Update the price filter state when the user types in the input filed
+  const handlePriceChange = (e) => {// Update the price filter state when the user types in the input filed
     setPriceFilter(e.target.value);
   };
 
