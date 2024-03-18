@@ -105,4 +105,14 @@ function calcPrices(orderItems) {
       
     }
   }
-export {createOrder,getAllOrders,getUserOrders,countTotalOrders}
+  const calculateTotalSales = async(req,res)=>{
+    try {
+      const orders = await Order.find();
+      const totalSales = orders.reduce((sum,orders)=>sum + orders.totalPrice,0)
+      res.json(totalSales)
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+      
+    }
+  }
+export {createOrder,getAllOrders,getUserOrders,countTotalOrders,calculateTotalSales}
